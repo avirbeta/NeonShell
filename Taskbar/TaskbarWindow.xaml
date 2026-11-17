@@ -120,6 +120,10 @@
 
             <!-- Трей -->
             <StackPanel Grid.Column="4" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,6,0">
+                <Button x:Name="StudyBtn" Style="{StaticResource IconButton}" Width="34" Height="34"
+                        FontSize="14" Click="OnStudyClick" ToolTip="Время учёбы" Content="&#xE72E;"
+                        Visibility="Collapsed"/>
+
                 <Button x:Name="BatteryBtn" Style="{StaticResource IconButton}" Width="34" Height="34"
                         FontSize="15" Click="OnBatteryClick" ToolTip="Батарея" Visibility="Collapsed"/>
                 <Button x:Name="NetworkBtn" Style="{StaticResource IconButton}" Width="34" Height="34"

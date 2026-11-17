@@ -77,6 +77,13 @@ namespace NeonShell
                     "Оболочка запущена. ПКМ по значку в трее — меню, «Выйти в Windows» — восстановление.",
                     NotificationKind.Info);
 
+                if (StudyModeService.IsActive)
+                {
+                    Notifications.Show("Время учёбы",
+                        "Игры заблокированы. " + StudyModeService.StatusText + ". Удачи в учёбе!",
+                        NotificationKind.Warning);
+                }
+
                 // Автотест: запуск на несколько секунд с корректным выходом
                 if (StartupArgs.Contains("--autotest", StringComparer.OrdinalIgnoreCase))
                 {

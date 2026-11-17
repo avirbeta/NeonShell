@@ -63,6 +63,7 @@ namespace NeonShell.Settings
                 new { Id = "battery", Glyph = "\uE850", Title = "Батарея" },
                 new { Id = "wifi", Glyph = "\uE701", Title = "Wi-Fi" },
                 new { Id = "notifications", Glyph = "\uE7ED", Title = "Уведомления" },
+                new { Id = "study", Glyph = "\uE72E", Title = "Учёба" },
                 new { Id = "games", Glyph = "\uE7FC", Title = "Игры" },
                 new { Id = "system", Glyph = "\uE713", Title = "Система" },
             };
@@ -75,6 +76,7 @@ namespace NeonShell.Settings
             _pages["battery"] = PageBattery;
             _pages["wifi"] = PageWifi;
             _pages["notifications"] = PageNotifications;
+            _pages["study"] = PageStudy;
             _pages["games"] = PageGames;
             _pages["system"] = PageSystem;
 
@@ -152,6 +154,11 @@ namespace NeonShell.Settings
             IconRecycleChk.IsChecked = !s.HiddenBuiltinIcons.Contains("recycle");
             IconSettingsChk.IsChecked = !s.HiddenBuiltinIcons.Contains("settings");
             IconExitChk.IsChecked = !s.HiddenBuiltinIcons.Contains("exit");
+            StudyNowChk.IsChecked = s.StudyModeEnabled;
+            ScheduleChk.IsChecked = s.StudyScheduleEnabled;
+            StudyStartBox.Text = s.StudyStart;
+            StudyEndBox.Text = s.StudyEnd;
+            UpdateStudyPage();
             _loading = false;
         }
 
@@ -634,6 +641,62 @@ namespace NeonShell.Settings
         {
             _wifi.Disconnect();
             App.Notifications.Show("Wi-Fi", "Отключение от сети...", NotificationKind.Info);
+        }
+
+        // ---------- режим учёбы ----------
+
+        private void UpdateStudyPage()
+        {
+            bool active = StudyModeService.IsActive;
+            StudyStatusText.Text = StudyModeService.StatusText;
+            StudyStatusText.Foreground = active
+                ? (Brush)Application.Current.Resources["WarningBrush"]
+                : (Brush)Application.Current.Resources["TextPrimaryBrush"];
+            StudyGlyphText.Foreground = active
+                ? (Brush)Application.Current.Resources["WarningBrush"]
+                : (Brush)Application.Current.Resources["AccentBrush"];
+        }
+
+        private void OnStudyNowChanged(object sender, RoutedEventArgs e)
+        {
+            if (_loading) return;
+            StudyModeService.SetEnabled(StudyNowChk.IsChecked == true);
+            UpdateStudyPage();
+            App.Notifications.Show("Время учёбы", StudyModeService.StatusText,
+                StudyModeService.IsActive ? NotificationKind.Warning : NotificationKind.Success);
+        }
+
+        private void OnScheduleChanged(object sender, RoutedEventArgs e)
+        {
+            if (_loading) return;
+            if (!TimeSpan.TryParse(StudyStartBox.Text, out _) || !TimeSpan.TryParse(StudyEndBox.Text, out _))
+            {
+                App.Notifications.Show("Расписание",
+                    "Укажите корректное время в формате ЧЧ:ММ (например, 18:00).", NotificationKind.Warning);
+                _loading = true;
+                ScheduleChk.IsChecked = !ScheduleChk.IsChecked;
+                _loading = false;
+                return;
+            }
+            StudyModeService.SetSchedule(ScheduleChk.IsChecked == true, StudyStartBox.Text, StudyEndBox.Text);
+            UpdateStudyPage();
+        }
+
+        private void OnApplySchedule(object sender, RoutedEventArgs e)
+        {
+            if (!TimeSpan.TryParse(StudyStartBox.Text, out var start) || !TimeSpan.TryParse(StudyEndBox.Text, out var end))
+            {
+                App.Notifications.Show("Расписание", "Неверный формат времени. Пример: 18:00", NotificationKind.Warning);
+                return;
+            }
+            if (start == end)
+            {
+                App.Notifications.Show("Расписание", "Время начала и конца не должно совпадать.", NotificationKind.Warning);
+                return;
+            }
+            StudyModeService.SetSchedule(ScheduleChk.IsChecked == true, StudyStartBox.Text, StudyEndBox.Text);
+            UpdateStudyPage();
+            App.Notifications.Show("Расписание", "Сохранено: " + StudyModeService.StatusText, NotificationKind.Success);
         }
     }
 }

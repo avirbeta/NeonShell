@@ -41,6 +41,9 @@ namespace NeonShell.Models
 
         private bool _colorReady;
         public bool ColorReady { get => _colorReady; set => Set(ref _colorReady, value); }
+
+        private bool _isLocked;
+        public bool IsLocked { get => _isLocked; set => Set(ref _isLocked, value); }
     }
 
     public class RunningAppInfo : ObservableObject

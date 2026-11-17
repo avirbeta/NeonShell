@@ -468,6 +468,11 @@ namespace NeonShell.Taskbar
         {
             try
             {
+                // индикатор времени учёбы
+                bool study = StudyModeService.IsActive;
+                StudyBtn.Visibility = study ? Visibility.Visible : Visibility.Collapsed;
+                StudyBtn.ToolTip = "Время учёбы: игры заблокированы\n" + StudyModeService.StatusText;
+
                 if (SystemServices.BatteryService.IsPresent)
                 {
                     BatteryBtn.Visibility = Visibility.Visible;
@@ -512,6 +517,9 @@ namespace NeonShell.Taskbar
 
         private void OnCcClick(object sender, RoutedEventArgs e)
             => App.WindowManager?.ToggleControlCenter();
+
+        private void OnStudyClick(object sender, RoutedEventArgs e)
+            => App.WindowManager?.OpenSettings("study");
 
         private void OnStartClick(object sender, RoutedEventArgs e)
             => App.WindowManager?.ToggleStartMenu();

@@ -90,6 +90,13 @@ namespace NeonShell.StartMenu
         {
             if ((sender as Button)?.Tag is GameEntry game)
             {
+                if (game.IsLocked)
+                {
+                    App.Notifications.Show("Время учёбы",
+                        "Игра «" + game.Name + "» заблокирована. Управление — Параметры Neon → Учёба.",
+                        NotificationKind.Warning);
+                    return;
+                }
                 CloseMenu();
                 GameScanner.LaunchGame(game, App.Log);
             }
@@ -212,7 +219,12 @@ namespace NeonShell.StartMenu
                 ? _allGames
                 : _allGames.Where(g => g.Name.Contains(q, StringComparison.OrdinalIgnoreCase)).ToList();
             Games.Clear();
-            foreach (var g in games) Games.Add(g);
+            bool study = StudyModeService.IsActive;
+            foreach (var g in games)
+            {
+                g.IsLocked = study;
+                Games.Add(g);
+            }
 
             IEnumerable<AppEntry> apps = _currentCategory switch
             {

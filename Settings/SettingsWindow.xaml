@@ -248,6 +248,51 @@
                     <Button Content="Отключиться от текущей сети" HorizontalAlignment="Left" Margin="0,12,0,0" Click="OnWifiDisconnect"/>
                 </StackPanel>
 
+                <!-- ===== УЧЁБА ===== -->
+                <StackPanel x:Name="PageStudy" Visibility="Collapsed">
+                    <TextBlock Text="ВРЕМЯ УЧЁБЫ" Style="{StaticResource SectionTitle}" FontSize="15"/>
+                    <Border Style="{StaticResource CardBorder}" Padding="16,14" Margin="0,14,0,0">
+                        <Grid>
+                            <StackPanel>
+                                <TextBlock x:Name="StudyStatusText" Text="" FontSize="17" FontWeight="SemiBold"
+                                           Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                <TextBlock Text="Когда действует режим учёбы, запуск ЛЮБЫХ игр (Steam, Epic, добавленных вручную) полностью заблокирован."
+                                           FontSize="12" Foreground="{DynamicResource TextSecondaryBrush}" TextWrapping="Wrap"
+                                           MaxWidth="480" Margin="0,6,0,0"/>
+                            </StackPanel>
+                            <TextBlock x:Name="StudyGlyphText" Text="&#xE72E;" FontFamily="{DynamicResource IconFont}"
+                                       FontSize="40" Foreground="{DynamicResource AccentBrush}"
+                                       HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,16,0,0">
+                        <CheckBox x:Name="StudyNowChk" Style="{StaticResource Switch}" VerticalAlignment="Center"
+                                  Checked="OnStudyNowChanged" Unchecked="OnStudyNowChanged"/>
+                        <TextBlock Text="Включить режим учёбы прямо сейчас" FontSize="13" Foreground="{DynamicResource TextPrimaryBrush}"
+                                   Margin="12,0,0,0" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,16,0,0">
+                        <CheckBox x:Name="ScheduleChk" Style="{StaticResource Switch}" VerticalAlignment="Center"
+                                  Checked="OnScheduleChanged" Unchecked="OnScheduleChanged"/>
+                        <TextBlock Text="Блокировать игры по расписанию (каждый день)" FontSize="13"
+                                   Foreground="{DynamicResource TextPrimaryBrush}" Margin="12,0,0,0" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,14,0,0">
+                        <TextBlock Text="С" FontSize="13" Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center"/>
+                        <TextBox x:Name="StudyStartBox" Width="70" Margin="8,0,0,0" TextAlignment="Center" ToolTip="ЧЧ:ММ"/>
+                        <TextBlock Text="по" FontSize="13" Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center" Margin="14,0,0,0"/>
+                        <TextBox x:Name="StudyEndBox" Width="70" Margin="8,0,0,0" TextAlignment="Center" ToolTip="ЧЧ:ММ"/>
+                        <Button Content="Применить" Margin="14,0,0,0" Click="OnApplySchedule"/>
+                    </StackPanel>
+
+                    <TextBlock Text="В указанный период игры не запускаются вообще. Интервал может переходить через полночь (например, 22:00 — 07:00)."
+                               FontSize="11.5" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,12,0,0"
+                               TextWrapping="Wrap" MaxWidth="520"/>
+                </StackPanel>
+
                 <!-- ===== СИСТЕМА ===== -->
                 <StackPanel x:Name="PageSystem" Visibility="Collapsed">
                     <TextBlock Text="СИСТЕМА" Style="{StaticResource SectionTitle}" FontSize="15"/>

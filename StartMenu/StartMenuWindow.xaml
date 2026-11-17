@@ -78,6 +78,17 @@
                                                        Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality"
                                                        HorizontalAlignment="Center" VerticalAlignment="Center"
                                                        Visibility="{Binding Cover, Converter={StaticResource NullToCollapsed}}"/>
+                                                <Border Background="#D905070D"
+                                                        Visibility="{Binding IsLocked, Converter={StaticResource BoolToVis}}">
+                                                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                        <TextBlock Text="&#xE72E;" FontFamily="{DynamicResource IconFont}"
+                                                                   FontSize="30" Foreground="#FFFFC233"
+                                                                   HorizontalAlignment="Center"/>
+                                                        <TextBlock Text="ЗАБЛОКИРОВАНО" FontSize="10.5" FontWeight="Bold"
+                                                                   Foreground="#FFFFC233" HorizontalAlignment="Center"
+                                                                   Margin="0,4,0,0"/>
+                                                    </StackPanel>
+                                                </Border>
                                             </Grid>
                                         </Border>
                                         <TextBlock Text="{Binding Name}" FontSize="12" FontWeight="SemiBold"

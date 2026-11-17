@@ -49,6 +49,12 @@ namespace NeonShell.Models
         public List<string> HiddenGameIds { get; set; } = new();
         public List<ManualGame> ManualGames { get; set; } = new();
 
+        // Режим учёбы (без PIN: ручной + расписание)
+        public bool StudyModeEnabled { get; set; } = false;
+        public bool StudyScheduleEnabled { get; set; } = false;
+        public string StudyStart { get; set; } = "18:00";
+        public string StudyEnd { get; set; } = "21:00";
+
         // Система
         public bool Autostart { get; set; } = false;
     }

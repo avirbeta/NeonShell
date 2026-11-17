@@ -176,6 +176,16 @@ namespace NeonShell.Services
         {
             try
             {
+                if (StudyModeService.IsActive)
+                {
+                    System.Windows.MessageBox.Show(
+                        "Сейчас время учёбы — игры полностью заблокированы.\n\n" +
+                        StudyModeService.StatusText + "\n\n" +
+                        "Управление: Параметры Neon → Учёба.",
+                        "Neon Shell — время учёбы",
+                        System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+                    return;
+                }
                 if (game.IsSteamUri)
                 {
                     System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(game.LaunchPath)
