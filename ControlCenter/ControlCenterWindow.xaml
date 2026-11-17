@@ -1,0 +1,160 @@
+<Window x:Class="NeonShell.ControlCenter.ControlCenterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStyle="None" ResizeMode="NoResize" ShowInTaskbar="False"
+        AllowsTransparency="True" Background="Transparent"
+        Topmost="True" ShowActivated="True"
+        Width="404" MaxHeight="700" SizeToContent="Height"
+        Deactivated="OnDeactivated" PreviewKeyDown="OnKeyDown">
+    <Border CornerRadius="16" Background="#F50A0C14" BorderBrush="{DynamicResource AccentBrush}" BorderThickness="1">
+        <StackPanel Margin="16">
+
+            <Grid Margin="0,2,0,12">
+                <TextBlock Text="ЦЕНТР УПРАВЛЕНИЯ" FontSize="14" FontWeight="SemiBold"
+                           Foreground="{DynamicResource AccentBrush}" VerticalAlignment="Center"/>
+                <Button Style="{StaticResource IconButton}" FontSize="15" Content="&#xE713;"
+                        HorizontalAlignment="Right" ToolTip="Параметры Neon" Click="OnOpenSettings"/>
+            </Grid>
+
+            <WrapPanel>
+                <Button Width="86" Height="74" Margin="3" Background="#FF12151F"
+                        BorderBrush="#FF1E2433" BorderThickness="1"
+                        Click="OnOpenWifiSettings" ToolTip="Настройки Wi-Fi">
+                    <StackPanel>
+                        <TextBlock Text="&#xE701;" FontFamily="{DynamicResource IconFont}" FontSize="22"
+                                   Foreground="{DynamicResource AccentBrush}" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Wi-Fi" FontSize="11" Foreground="{DynamicResource TextPrimaryBrush}"
+                                   HorizontalAlignment="Center" Margin="0,6,0,0"/>
+                    </StackPanel>
+                </Button>
+                <Button Width="86" Height="74" Margin="3" Background="#FF12151F"
+                        BorderBrush="#FF1E2433" BorderThickness="1"
+                        Click="OnQuickAction" Tag="ms-settings:bluetooth" ToolTip="Параметры Bluetooth">
+                    <StackPanel>
+                        <TextBlock Text="&#xE702;" FontFamily="{DynamicResource IconFont}" FontSize="22"
+                                   Foreground="{DynamicResource AccentBrush}" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Bluetooth" FontSize="11" Foreground="{DynamicResource TextPrimaryBrush}"
+                                   HorizontalAlignment="Center" Margin="0,6,0,0"/>
+                    </StackPanel>
+                </Button>
+                <Button Width="86" Height="74" Margin="3" Background="#FF12151F"
+                        BorderBrush="#FF1E2433" BorderThickness="1"
+                        Click="OnQuickAction" Tag="ms-settings:nightlight" ToolTip="Ночной свет">
+                    <StackPanel>
+                        <TextBlock Text="&#xE706;" FontFamily="{DynamicResource IconFont}" FontSize="22"
+                                   Foreground="{DynamicResource AccentBrush}" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Ночной свет" FontSize="11" Foreground="{DynamicResource TextPrimaryBrush}"
+                                   HorizontalAlignment="Center" Margin="0,6,0,0"/>
+                    </StackPanel>
+                </Button>
+                <Button Width="86" Height="74" Margin="3" Background="#FF12151F"
+                        BorderBrush="#FF1E2433" BorderThickness="1"
+                        Click="OnQuickAction" Tag="ms-settings:batterysaver" ToolTip="Экономия заряда">
+                    <StackPanel>
+                        <TextBlock Text="&#xE850;" FontFamily="{DynamicResource IconFont}" FontSize="22"
+                                   Foreground="{DynamicResource AccentBrush}" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Экономия" FontSize="11" Foreground="{DynamicResource TextPrimaryBrush}"
+                                   HorizontalAlignment="Center" Margin="0,6,0,0"/>
+                    </StackPanel>
+                </Button>
+                <Button Width="86" Height="74" Margin="3" Background="#FF12151F"
+                        BorderBrush="#FF1E2433" BorderThickness="1"
+                        Click="OnQuickAction" Tag="ms-settings:project" ToolTip="Проецирование">
+                    <StackPanel>
+                        <TextBlock Text="&#xE8F4;" FontFamily="{DynamicResource IconFont}" FontSize="22"
+                                   Foreground="{DynamicResource AccentBrush}" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Экран" FontSize="11" Foreground="{DynamicResource TextPrimaryBrush}"
+                                   HorizontalAlignment="Center" Margin="0,6,0,0"/>
+                    </StackPanel>
+                </Button>
+                <Button Width="86" Height="74" Margin="3" Background="#FF12151F"
+                        BorderBrush="#FF1E2433" BorderThickness="1"
+                        Click="OnQuickAction" Tag="ms-settings:network" ToolTip="Параметры сети">
+                    <StackPanel>
+                        <TextBlock Text="&#xE909;" FontFamily="{DynamicResource IconFont}" FontSize="22"
+                                   Foreground="{DynamicResource AccentBrush}" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Сеть" FontSize="11" Foreground="{DynamicResource TextPrimaryBrush}"
+                                   HorizontalAlignment="Center" Margin="0,6,0,0"/>
+                    </StackPanel>
+                </Button>
+                <Button Width="86" Height="74" Margin="3" Background="#FF12151F"
+                        BorderBrush="#FF1E2433" BorderThickness="1"
+                        Click="OnQuickAction" Tag="ms-settings:powersleep" ToolTip="Параметры питания">
+                    <StackPanel>
+                        <TextBlock Text="&#xE7E8;" FontFamily="{DynamicResource IconFont}" FontSize="22"
+                                   Foreground="{DynamicResource AccentBrush}" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Питание" FontSize="11" Foreground="{DynamicResource TextPrimaryBrush}"
+                                   HorizontalAlignment="Center" Margin="0,6,0,0"/>
+                    </StackPanel>
+                </Button>
+                <Button Width="86" Height="74" Margin="3" Background="#FF12151F"
+                        BorderBrush="#FF1E2433" BorderThickness="1"
+                        Click="OnQuickAction" Tag="ms-settings:sound" ToolTip="Параметры звука">
+                    <StackPanel>
+                        <TextBlock Text="&#xE767;" FontFamily="{DynamicResource IconFont}" FontSize="22"
+                                   Foreground="{DynamicResource AccentBrush}" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Звук" FontSize="11" Foreground="{DynamicResource TextPrimaryBrush}"
+                                   HorizontalAlignment="Center" Margin="0,6,0,0"/>
+                    </StackPanel>
+                </Button>
+            </WrapPanel>
+
+            <Grid Margin="0,14,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="VolumeGlyph" Text="&#xE767;" FontFamily="{DynamicResource IconFont}" FontSize="18"
+                           Foreground="{DynamicResource AccentBrush}" VerticalAlignment="Center"/>
+                <Slider x:Name="VolumeSlider" Grid.Column="1" Style="{StaticResource NeonSlider}"
+                        Minimum="0" Maximum="100" Margin="10,0" ValueChanged="OnVolumeChanged"/>
+                <TextBlock x:Name="VolumeValue" Grid.Column="2" Text="100%" FontSize="12"
+                           Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center"/>
+            </Grid>
+
+            <Border Style="{StaticResource CardBorder}" Padding="12,10" Margin="0,10,0,0">
+                <Grid>
+                    <StackPanel>
+                        <TextBlock x:Name="NetworkName" Text="Нет сети" FontSize="13" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextPrimaryBrush}"/>
+                        <TextBlock x:Name="NetworkIp" Text="—" FontSize="11.5"
+                                   Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,3,0,0"/>
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <TextBlock x:Name="NetworkDown" Text="↓ 0 Мбит/с" FontSize="11.5"
+                                   Foreground="{DynamicResource TextSecondaryBrush}" HorizontalAlignment="Right"/>
+                        <TextBlock x:Name="NetworkUp" Text="↑ 0 Мбит/с" FontSize="11.5"
+                                   Foreground="{DynamicResource TextSecondaryBrush}" HorizontalAlignment="Right" Margin="0,2,0,0"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <Border x:Name="BatteryCard" Style="{StaticResource CardBorder}" Padding="12,10" Margin="0,10,0,0"
+                    Visibility="Collapsed">
+                <Grid>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock x:Name="BatteryGlyph" Text="&#xE850;" FontFamily="{DynamicResource IconFont}"
+                                   FontSize="18" Foreground="{DynamicResource AccentBrush}" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="BatteryPercent" Text="100%" FontSize="15" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                    </StackPanel>
+                    <TextBlock x:Name="BatteryStatus" Text="" FontSize="12"
+                               Foreground="{DynamicResource TextSecondaryBrush}" HorizontalAlignment="Right"
+                               VerticalAlignment="Center"/>
+                </Grid>
+            </Border>
+
+            <Grid Margin="0,16,0,0">
+                <StackPanel Orientation="Horizontal">
+                    <Button Style="{StaticResource IconButton}" Content="&#xE7E8;" FontSize="16" ToolTip="Завершение работы" Click="OnShutdown"/>
+                    <Button Style="{StaticResource IconButton}" Content="&#xE777;" FontSize="16" ToolTip="Перезагрузка" Click="OnRestart"/>
+                    <Button Style="{StaticResource IconButton}" Content="&#xE823;" FontSize="16" ToolTip="Сон" Click="OnSleep"/>
+                    <Button Style="{StaticResource IconButton}" Content="&#xE80F;" FontSize="16" ToolTip="Выйти в Windows" Click="OnExit"/>
+                </StackPanel>
+                <Button Content="Все параметры Windows" FontSize="12" Padding="12,7" HorizontalAlignment="Right"
+                        VerticalAlignment="Center" Click="OnOpenWindowsSettings"/>
+            </Grid>
+        </StackPanel>
+    </Border>
+</Window>
